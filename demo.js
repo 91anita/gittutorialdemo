@@ -1,62 +1,37 @@
-var itemList=document.querySelector('#items');
-//parentElement
-//console.log(itemList.parentElement);
-//itemList.parentElement.style.backgroundColor='#f4f4f4';
-//console.log(itemList.parentElement.parentElement.parentElement)
-
-//chiledNodes
-//console.log(itemList.childNodes)
-
-// console.log(itemList.children);
-// console.log(itemList.children[1]);
-// itemList.children[1].style.backgroundColor='yellow'
-
-//firstchild
-// console.log(itemList.firstChild);
-
-//firstelementchild
-// console.log(itemList.firstElementChild);
-// itemList.firstElementChild.textContent="hello"
-
-//lastchild
-// console.log(itemList.lastChild);
-
-// //lastelementchild
-// console.log(itemList.lastElementChild);
-// itemList.lastElementChild.textContent="hello last"
-
-//nextsibling
-// console.log(itemList.nextSibling);
-
-// //nextelementsibling
-// console.log(itemList.nextElementSibling);
-
-// //previoussibling
-// console.log(itemList.previousSibling)
-
-///previouselementsibling
-// console.log(itemList.previousElementSibling)
-// itemList.previousElementSibling.style.color='green'
-
-//createelement
-var newDiv=document.createElement('div')
-newDiv.className='hello';
-newDiv.id='hello1'
-newDiv.setAttribute('title', 'hello')
-var newDivText=document.createTextNode('HEllo')
-newDiv.appendChild(newDivText)
-var container =document.querySelector('header .container')
-var h1=document.querySelector('header h1')
-console.log(newDiv)
-container.insertBefore(newDiv, h1)
-
-var newdiv=document.createElement('div')
-newdiv.className='hello';
-newdiv.id='hello2'
-newdiv.setAttribute('ul', 'hello')
-var newdivText=document.createTextNode('HEllo')
-newdiv.appendChild(newdivText)
-var container =document.querySelector('div .list-group')
-var h1=document.querySelector('div li')
-console.log(newdiv)
-container.insertBefore(newdiv, h1)
+var form = document.getElementById('addForm');
+var itemList = document.getElementById('items');
+// Form submit event
+form.addEventListener('submit', addItem);
+//delete even
+itemList.addEventListener('click', removeItem)
+// Add item
+function addItem(e){
+  e.preventDefault();
+  // Get input value
+  var newItem = document.getElementById('item').value;
+  // Create new li element
+  var li = document.createElement('li');
+  // Add class
+  li.className = 'list-group-item';
+  // Add text node with input value
+  li.appendChild(document.createTextNode(newItem));
+  // Create del button element
+  var deleteBtn = document.createElement('button');
+  // Add classes to del button
+  deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
+  // Append text node
+  deleteBtn.appendChild(document.createTextNode('X'));
+  // Append button to li
+  li.appendChild(deleteBtn);
+  // Append li to list
+  itemList.appendChild(li);
+}
+//remove item
+function removeItem(e){
+    if(e.target.classList.contains('delete'))
+    if(confirm('Are you Sure?'));
+    {
+        var li=e.target.parentElement;
+        itemList.removeChild(li);
+    }
+}
